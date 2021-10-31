@@ -8,6 +8,10 @@ import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
 
 const router = Router();
 
+router.get("/", (req, res) => {
+  res.send("<h1>LIVE</h1>");
+});
+
 router.post("/authenticate", new AuthenticateUserController().handle);
 router.post(
   "/messages",
