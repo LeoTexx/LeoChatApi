@@ -5,6 +5,7 @@ import { GetLast10MessagesController } from "./controllers/GetLast10MessagesCont
 import { GetLast3MessagesController } from "./controllers/GetLast3MessagesController";
 import { ProfileUserController } from "./controllers/ProfileUserController";
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
+import { ensureIsMobile } from "./middleware/ensureIsMobile";
 
 const router = Router();
 
@@ -13,6 +14,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/authenticate", new AuthenticateUserController().handle);
+router.post(
+  "/authenticate/app",
+  ensureIsMobile,
+  new AuthenticateUserController().handle
+);
 router.post(
   "/messages",
   ensureAuthenticated,
